@@ -18,7 +18,7 @@
     @apply text-blue-500 hover:text-blue-600 hover:underline;
   }
 
-  .input-field:has(input:focus) {
+  .input-field:has(input:focus), .input-field:has(input:not(:placeholder-shown)) {
     @apply ring-primary-500/40 ring-2 border-2 border-primary-500;
   }
 

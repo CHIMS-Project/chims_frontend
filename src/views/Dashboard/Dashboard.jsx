@@ -1,6 +1,8 @@
 
 export const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <div className="h-screen flex" >
+      Dashboard
+    </div>
   )
 }
