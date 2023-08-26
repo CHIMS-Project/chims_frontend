@@ -4,7 +4,7 @@ import { faFileClipboard } from "@fortawesome/free-regular-svg-icons"
 
 export const MainSideNav = () => {
   return (
-    <nav className="flex flex-col gap-10 px-6 mt-8" >
+    <nav className="flex flex-col gap-10 px-6 mt-3" >
 
         <SideNavBtn to="." text="Dashboard" end icon={faDashboard} />
         <SideNavBtn to="appointments" text="Appointments" icon={faFileClipboard} />

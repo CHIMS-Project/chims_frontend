@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { useRef, useContext } from "react";
 import { AppConfigsContext } from "../serviceProviders/contexts/AppConfigsContext";
+import { MainHeader } from "../components/headers/MainHeader";
 
 export const MainLayout = () => {
 	const navCtrlRef = useRef(null);
@@ -15,11 +16,11 @@ export const MainLayout = () => {
 	};
 	return (
 		<div className="h-screen flex">
-			<div className="w-fit h-full relative py-2 border-r border-r-gray-100">
+			<div className="w-fit h-full relative py-2 border-r border-r-gray-100 pt-5">
 				<button
 					onClick={toggleNav}
 					ref={navCtrlRef}
-					className="absolute -right-3 top-5 py-1 px-3 bg-slate-50 border-2 boarder-slate-100 rounded-md transition">
+					className="absolute -right-3 top-5 py-1 px-3 bg-slate-50 border-2 boarder-slate-100 rounded-md transition opacity-50 hover:opacity-100">
 					<FontAwesomeIcon icon={faChevronLeft} />
 				</button>
 				{sideNavOpen && (
@@ -38,7 +39,8 @@ export const MainLayout = () => {
 				<MainSideNav />
 			</div>
 
-			<div className="flex-1 h-full bg-gray-50">
+			<div className="flex-1 h-full bg-gray-50 overflow-auto">
+                <MainHeader />
 				<Outlet />
 			</div>
 		</div>
