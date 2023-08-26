@@ -1,5 +1,5 @@
-import LoginImg from '../assets/images/login-img.jpg'
-import { LoginForm } from '../components/form/Login/LoginForm'
+import LoginImg from '../../assets/images/login-img.jpg'
+import { LoginForm } from '../../components/form/Login/LoginForm'
 
 export const Login = () => {
   return (

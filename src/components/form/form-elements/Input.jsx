@@ -14,6 +14,7 @@ export const Input = ({ label, id, type = 'text', onChange, isRequired }) => {
 				className="w-full border-0 bg-inherit focus:ring-0"
                 required={isRequired}
                 onChange={onChange}
+				placeholder=""
 			/>
 		</>
 	);

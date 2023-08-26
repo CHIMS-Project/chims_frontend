@@ -22,7 +22,7 @@
     @apply ring-primary-500/40 ring-2 border-2 border-primary-500;
   }
 
-  .input-field:has(input:focus) label  {
+  .input-field:has(input:focus) label, .input-field:has(input:not(:placeholder-shown)) label  {
     @apply top-0 text-sm text-gray-500 bg-slate-50 p-1;
   }
 }
