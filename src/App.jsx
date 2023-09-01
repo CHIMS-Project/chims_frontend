@@ -9,21 +9,21 @@ import { AppConfigsProvider } from "./serviceProviders/providers/AppConfigsProvi
 function App() {
 
   return (
-    <AppConfigsProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <AppConfigsProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route element={<ProtectedRoutes />} >
               <Route  path="main" element={<MainLayout />} >
                 <Route index element={<Dashboard />} />
-                <Route path="*" element={<h1>404</h1>} />
+                <Route path="*" element={<Dashboard />} />
               </Route>
             </Route>
           </Routes>
         </BrowserRouter>
-      </AuthProvider> 
-    </AppConfigsProvider>
+      </AppConfigsProvider>
+    </AuthProvider> 
   )
 }
 

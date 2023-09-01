@@ -3,7 +3,6 @@ import { InputField } from "../input-fields/InputField";
 import { Input } from "../form-elements/Input";
 import { RoundedNextBtn } from "../../buttons/RoundedNextBtn";
 import { useContext, useState } from "react";
-// import { VerifiedID } from "./VerifiedID";
 import { AnimatePresence, motion } from "framer-motion";
 import { AuthContext } from "../../../serviceProviders/contexts/AuthContext";
 import profilePic from "../../../assets/images/profile-pic.jpg";
@@ -11,6 +10,8 @@ import logo from "../../../assets/images/logo 1.svg";
 
 export const LoginForm = () => {
 	const [idVerified, setIDVerified] = useState(false);
+	const [verifying, setVerifying] = useState(false)
+	const [loggingIn, setLoggingIn] = useState(false)
 	const [staffID, setStaffID] = useState("");
 	const [password, setPassword] = useState("");
 	const { login } = useContext(AuthContext);
@@ -19,15 +20,17 @@ export const LoginForm = () => {
 		e.preventDefault();
 
 		if (staffID === "") return alert("Staff Id is required");
+
+		setVerifying(true)
 		// perform ID verification logic
 
 		setIDVerified(true);
+		setVerifying(false)
 	};
 
 	const attemptLogin = (e) => {
 		e.preventDefault();
-		// console.log('ID',staffID)
-		// console.log('Password', password)
+		if(password === "") return alert("Please enter your password")
 
 		login({
 			staffID: staffID,
@@ -48,8 +51,8 @@ export const LoginForm = () => {
 				Sign in to St. Benson Hospital
 			</h1>
 			<form className="mt-10 w-full text-center">
-				{idVerified ? (
-					<AnimatePresence>
+				<AnimatePresence>
+					{idVerified ? (
 						<motion.div
 							className="w-full"
 							initial={{ opacity: 0, y: -30 }}
@@ -74,7 +77,6 @@ export const LoginForm = () => {
 										e.preventDefault();
 										setIDVerified(false);
 										setStaffID("");
-										
 									}}>
 									This is not me
 								</button>
@@ -90,7 +92,7 @@ export const LoginForm = () => {
 									}
 								/>
 
-								<RoundedNextBtn onClick={attemptLogin} />
+								<RoundedNextBtn onClick={attemptLogin} isLoading={loggingIn} />
 							</InputField>
 							<Link
 								to="."
@@ -98,25 +100,25 @@ export const LoginForm = () => {
 								Forgot password
 							</Link>
 						</motion.div>
-					</AnimatePresence>
-				) : (
-					<>
-						<InputField>
-							<Input
-								id="staffId"
-								label="Staff ID"
-								isRequired
-								onChange={(e) => setStaffID(e.target.value)}
-							/>
-							<RoundedNextBtn onClick={verifyID} />
-						</InputField>
-						<Link
-							to="."
-							className="mt-10 text-center">
-							Forgot staff ID
-						</Link>
-					</>
-				)}
+					) : (
+						<>
+							<InputField>
+								<Input
+									id="staffId"
+									label="Staff ID"
+									isRequired
+									onChange={(e) => setStaffID(e.target.value)}
+								/>
+								<RoundedNextBtn onClick={verifyID} isLoading={verifying} />
+							</InputField>
+							<Link
+								to="."
+								className="mt-10 text-center">
+								Forgot staff ID
+							</Link>
+						</>
+					)}
+				</AnimatePresence>
 			</form>
 		</div>
 	);
