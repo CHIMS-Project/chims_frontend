@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import logo from "../assets/images/logo 1.svg";
-import { MainSideNav } from "../components/navs/MainSideNav";
+import { MainSideNav } from "../components/navs/sidenavs/MainSideNav";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { useRef, useContext } from "react";

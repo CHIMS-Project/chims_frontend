@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom'
 export const Login = () => {
   const { isLoggedIn } = useContext(AuthContext)
 
-  if (isLoggedIn) return <Navigate to="main" />
+  if (isLoggedIn) return <Navigate to="app" />
   return (
     <div className="h-screen flex w-full">
         <div className="flex-1 h-full bg-primary-500" >
