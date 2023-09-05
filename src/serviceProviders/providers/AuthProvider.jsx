@@ -1,5 +1,5 @@
 import { AuthContext } from "../contexts/AuthContext";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { BACKEND_API_URL } from "../../utils/constants";
@@ -11,6 +11,35 @@ export const AuthProvider = ({ children }) => {
 	const [verified, setVerified] = useState(false);
 	const [authError, setAuthError] = useState(null);
     const { setUser } = useContext(UserContext);
+
+	const fetchUser = useCallback(async (token) => {
+		try {
+			const res = await axios.get(`${BACKEND_API_URL}auth/`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+					Accept: "application/json",
+				},
+			});
+			// console.log(res.data.user);
+			setUser(res.data.user);
+		} catch (err) {
+			console.log(err);
+			if (err.response.status === 401) {
+				console.log("Unauthorized");
+				setUser(null);
+				setIsLoggedIn(false);
+                removeToken();
+			}
+		}
+	}, [setUser]);
+
+	useEffect(() => {
+		console.log(isTokenSaved(), isLoggedIn);
+		if (isTokenSaved()) {
+			const token = getToken();
+			fetchUser(token);
+		}
+	}, [fetchUser, isLoggedIn]);
 
 	const login = (credentials) => {
 		// axios.post()
