@@ -7,7 +7,7 @@ import { UserContext } from "../../serviceProviders/contexts/UserContext";
 
 export const MainHeader = () => {
 	const { user } = useContext(UserContext);
-	const userType = user.role.toUpperCase().replace("-"," ");
+	const userType = user.type.toUpperCase().replace("-"," ");
 
 
 	return (
