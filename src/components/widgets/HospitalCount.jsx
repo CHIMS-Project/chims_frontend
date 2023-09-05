@@ -6,8 +6,38 @@ import { CardBody } from "../cards/CardBody";
 import { SmallCardDetail } from "../cards/SmallCardDetail";
 import { SecondaryBtnLink } from "../buttons/SecondaryBtnLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useCallback, useEffect, useState } from "react";
+import axios from "axios";
+import { BACKEND_API_URL } from "../../utils/constants";
+import { getToken } from "../../utils/helpers";
 
 export const HospitalCount = () => {
+	const [loading, setLoading] = useState(true)
+	const [count, setCount] = useState(0);
+
+	const fetchCount = useCallback( () => {
+		axios
+			.get(`${BACKEND_API_URL}hospitals/count`, {
+				headers: {
+					Authorization: `Bearer ${getToken()}`,
+				},
+			})
+			.then((res) => {
+				setCount(res.data.count);
+				setLoading(false)
+			})
+			.catch((err) => {
+				console.log(err);
+				setLoading(false)
+			});
+	
+	}, []);
+
+	useEffect(() => {
+		fetchCount();
+	}, [fetchCount]);
+	
+	if (loading) return (<div>Loading...</div>)
 	return (
 		<>
 			<CardContainer>
@@ -17,7 +47,7 @@ export const HospitalCount = () => {
 						to="staff/doctors"
 						className="hover:no-underline hover:bg-slate-100 rounded-md">
 						<SmallCardDetail
-							figure={6}
+							figure={count}
 							detailTitle="Hospitals"
 							icon={faHospital}
 						/>
