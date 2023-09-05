@@ -5,37 +5,48 @@ import { RoundedNextBtn } from "../../buttons/RoundedNextBtn";
 import { useContext, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { AuthContext } from "../../../serviceProviders/contexts/AuthContext";
-import profilePic from "../../../assets/images/profile-pic.jpg";
+// import profilePic from "../../../assets/images/profile-pic.jpg";
 import logo from "../../../assets/images/logo 1.svg";
 
 export const LoginForm = () => {
-	const [idVerified, setIDVerified] = useState(false);
-	const [verifying, setVerifying] = useState(false)
-	const [loggingIn, setLoggingIn] = useState(false)
+	// const [idVerified, setIDVerified] = useState(false);
+	const [verifying, setVerifying] = useState(false);
+	const [loggingIn, setLoggingIn] = useState(false);
 	const [staffID, setStaffID] = useState("");
 	const [password, setPassword] = useState("");
-	const { login } = useContext(AuthContext);
+	const { login, verified, verifyId, setVerified, authError } =
+		useContext(AuthContext);
+	const [verifiedUser, setVerifiedUser] = useState(null);
 
-	const verifyID = (e) => {
+	const verify = async (e) => {
 		e.preventDefault();
 
 		if (staffID === "") return alert("Staff Id is required");
 
-		setVerifying(true)
+		setVerifying(true);
 		// perform ID verification logic
+		const user = await verifyId(staffID);
 
-		setIDVerified(true);
-		setVerifying(false)
+		if (user) {
+			setVerifiedUser(user);
+		}
+
+		setVerifying(false);
 	};
 
+
+	
 	const attemptLogin = (e) => {
 		e.preventDefault();
-		if(password === "") return alert("Please enter your password")
+		if (password === "") return alert("Please enter your password");
+		setLoggingIn(true);
 
 		login({
-			staffID: staffID,
+			id: staffID,
 			password: password,
 		});
+
+		setLoggingIn(false);
 	};
 
 	return (
@@ -50,32 +61,42 @@ export const LoginForm = () => {
 			<h1 className="font-bold text-center text-2xl text-gray-400">
 				Sign in to St. Benson Hospital
 			</h1>
+			{
+				// Show error message if any
+				authError && (
+					<p className="text-red-500 text-center mt-5">
+						{authError}
+					</p>
+				)
+			}
 			<form className="mt-10 w-full text-center">
 				<AnimatePresence>
-					{idVerified ? (
+					{verified ? (
 						<motion.div
 							className="w-full"
 							initial={{ opacity: 0, y: -30 }}
 							animate={{ opacity: 1, y: 0 }}
 							exit={{ opacity: 0, y: -30 }}>
 							<div className="flex flex-col items-center justify-center mb-5 gap-2">
-								<div className="w-14 h-14 rounded-full bg-slate-300 overflow-hidden ring-4 ring-primary-400/20">
+								{/* <div className="w-14 h-14 rounded-full bg-slate-300 overflow-hidden ring-4 ring-primary-400/20">
 									<img
 										src={profilePic}
 										alt="profile picture"
 										className="w-full h-full object-cover"
 									/>
-								</div>
+								</div> */}
 								<div className="p-1 rounded-full bg-slate-100 text-primary-500/60 ">
 									<p className="px-5 font-semibold">
-										Dr. Micheal Osborn
+										{verifiedUser?.firstName}{" "}
+										{verifiedUser?.lastName}
 									</p>
+									<p>{staffID}</p>
 								</div>
 								<button
 									className="text-xs text-slate-400 hover:bg-slate-100 rounded-full px-4 py-1"
 									onClick={(e) => {
 										e.preventDefault();
-										setIDVerified(false);
+										setVerified(false);
 										setStaffID("");
 									}}>
 									This is not me
@@ -92,7 +113,10 @@ export const LoginForm = () => {
 									}
 								/>
 
-								<RoundedNextBtn onClick={attemptLogin} isLoading={loggingIn} />
+								<RoundedNextBtn
+									onClick={attemptLogin}
+									isLoading={loggingIn}
+								/>
 							</InputField>
 							<Link
 								to="."
@@ -109,7 +133,10 @@ export const LoginForm = () => {
 									isRequired
 									onChange={(e) => setStaffID(e.target.value)}
 								/>
-								<RoundedNextBtn onClick={verifyID} isLoading={verifying} />
+								<RoundedNextBtn
+									onClick={verify}
+									isLoading={verifying}
+								/>
 							</InputField>
 							<Link
 								to="."

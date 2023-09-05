@@ -7,14 +7,18 @@ import { useRef, useContext } from "react";
 import { AppConfigsContext } from "../serviceProviders/contexts/AppConfigsContext";
 import { MainHeader } from "../components/headers/MainHeader";
 import { motion, AnimatePresence } from "framer-motion";
+import { UserContext } from "../serviceProviders/contexts/UserContext";
 
 export const MainLayout = () => {
 	const navCtrlRef = useRef(null);
 	const { sideNavOpen, setSideNavOpen } = useContext(AppConfigsContext);
+	const { user } = useContext(UserContext);
 	const toggleNav = () => {
 		navCtrlRef.current.classList.toggle("rotate-180");
 		setSideNavOpen(!sideNavOpen);
 	};
+
+	if(user === null) return <div className="p-3" >Loading...</div>
 	return (
 		<div className="h-screen flex">
 			<div className="w-fit h-full relative py-2 border-r border-r-gray-100 pt-5 transition-alls">
