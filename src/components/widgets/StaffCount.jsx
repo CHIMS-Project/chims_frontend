@@ -83,7 +83,7 @@ export const StaffCount = () => {
 						/>
 					</Link>
 				</CardBody>
-				<SecondaryBtnLink to="patients">View All</SecondaryBtnLink>
+				<SecondaryBtnLink to="staff">View All</SecondaryBtnLink>
 			</CardContainer>
 		</>
 	);
