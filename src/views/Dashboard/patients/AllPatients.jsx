@@ -1,20 +1,20 @@
-import { CardContainer } from "../cards/CardContainer";
 import { useState, useCallback, useEffect } from "react";
 import axios from "axios";
-import { BACKEND_API_URL } from "../../utils/constants";
-import { getToken } from "../../utils/helpers";
-import { SearchBar } from "../form/SearchBar";
+import { getToken } from "../../../utils/helpers";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { AllHospitalsTable } from "../tables/AllHospitalsTable";
+import { PatientTable } from "../../../components/tables/PatientTable";
+import { CardContainer } from "../../../components/cards/CardContainer";
+import { BACKEND_API_URL } from "../../../utils/constants";
+import { SearchBar } from "../../../components/form/SearchBar";
 
-export const AllHospitals = ({ meta = false }) => {
-	const [hospitals, setHospitals] = useState([]);
+export const AllPatients = ({ meta = false }) => {
+	const [patients, setPatients] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [data, setData] = useState([]);
 	const [error, setError] = useState(null);
 
-	const fetchHospitals = useCallback((route = "hospitals") => {
+	const fetchHospitals = useCallback((route = "patients") => {
 		setLoading(true);
 		setError(null);
 		// console.log(route)
@@ -28,7 +28,7 @@ export const AllHospitals = ({ meta = false }) => {
 			})
 			.then((res) => {
 				setData(res.data);
-				setHospitals(res.data.data);
+				setPatients(res.data.data);
 				// console.log(res.data);
 			})
 			.catch((err) => {
@@ -64,7 +64,7 @@ export const AllHospitals = ({ meta = false }) => {
 	return (
 		<CardContainer className="w-full mt-5">
 			<SearchBar />
-			<AllHospitalsTable hospitals={hospitals} />
+			<PatientTable patients={patients} />
 			{/* page meta */}
 			<div className="flex justify-between my-6">
 				<div>
@@ -96,7 +96,7 @@ export const AllHospitals = ({ meta = false }) => {
 				</>
 			) : (
 				<Link
-					to="hospitals"
+					to="patients"
 					className="mt-4 bg-primary-500 hover:bg-primary-600 text-white hover:no-underline hover:text-white px-5 py-2 rounded-md inline-block">
 					View all
 				</Link>
@@ -106,6 +106,6 @@ export const AllHospitals = ({ meta = false }) => {
 };
 
 
-AllHospitals.propTypes = {
+AllPatients.propTypes = {
 	meta: PropTypes.bool,
 };

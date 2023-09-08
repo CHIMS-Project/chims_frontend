@@ -9,7 +9,7 @@ export const SideNavBtn = ({ to, text, icon, end = false }) => {
 	const activeClass =
 		"flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-6 py-2 rounded-md hover:text-white hover:no-underline shadow-xl transition-all";
 	const inactiveClass =
-		"flex items-center gap-2 hover:bg-slate-100 text-primary-300 px-4 py-1 hover:no-underline rounded-md hover:text-primary-500 transition-all font-normal";
+		"flex items-center gap-2 hover:bg-slate-100 text-slate-300 px-4 py-1 hover:no-underline rounded-md hover:text-slate-500 transition-all font-normal";
 
 	const { sideNavOpen } = useContext(AppConfigsContext);
 

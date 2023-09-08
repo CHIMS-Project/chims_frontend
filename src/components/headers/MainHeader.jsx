@@ -27,7 +27,10 @@ export const MainHeader = () => {
 					/>
 				</div>
 				
-				<span>{user.firstName} {user.lastName}</span>
+				<div className="grid">
+					<span>{user.lastName} {user.firstName}</span>
+					<span className="text-xs text-slate-300">{user.id}</span>
+				</div>
 				<UserHeaderOptions />
 			</div>
 		</header>

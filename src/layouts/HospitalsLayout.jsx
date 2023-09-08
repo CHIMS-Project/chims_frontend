@@ -1,11 +1,9 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { useBreadCrumbs } from '../hooks/useBreadCrumbs';
 
 export const HospitalsLayout = () => {
-	const { pathname } = useLocation();
-
-	const breadcrumbs = pathname.split('/').filter((crumb) => crumb);
-	// remove the first element
-	breadcrumbs.shift();
+	
+	const breadcrumbs = useBreadCrumbs();
 
 	// console.log(breadcrumbs);
 	return (

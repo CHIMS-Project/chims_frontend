@@ -1,20 +1,21 @@
-import { CardContainer } from "../cards/CardContainer";
 import { useState, useCallback, useEffect } from "react";
 import axios from "axios";
-import { BACKEND_API_URL } from "../../utils/constants";
-import { getToken } from "../../utils/helpers";
-import { SearchBar } from "../form/SearchBar";
+import { getToken } from "../../../utils/helpers";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { AllHospitalsTable } from "../tables/AllHospitalsTable";
+import { CardContainer } from "../../../components/cards/CardContainer";
+import { BACKEND_API_URL } from "../../../utils/constants";
+import { SearchBar } from "../../../components/form/SearchBar";
+import { StaffTable } from "../../../components/tables/StaffTable";
 
-export const AllHospitals = ({ meta = false }) => {
-	const [hospitals, setHospitals] = useState([]);
+export const AllStaff = ({ meta = false }) => {
+	const [staff, setStaff] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [data, setData] = useState([]);
 	const [error, setError] = useState(null);
 
-	const fetchHospitals = useCallback((route = "hospitals") => {
+
+	const fetchStaff = useCallback((route = "staff") => {
 		setLoading(true);
 		setError(null);
 		// console.log(route)
@@ -28,7 +29,7 @@ export const AllHospitals = ({ meta = false }) => {
 			})
 			.then((res) => {
 				setData(res.data);
-				setHospitals(res.data.data);
+				setStaff(res.data.data);
 				// console.log(res.data);
 			})
 			.catch((err) => {
@@ -41,19 +42,22 @@ export const AllHospitals = ({ meta = false }) => {
 	}, []);
 
 	useEffect(() => {
-		fetchHospitals();
-	}, [fetchHospitals]);
+		fetchStaff();
+	}, [fetchStaff]);
 
-	if(error) return (
-		<CardContainer className="w-full h-96 mt-5">
-			<div className="flex flex-col gap-4">
-				<div className="text-red-500 text-center">{error}</div>
-				<button onClick={() => fetchHospitals()} className="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-md">
-					Retry
-				</button>
-			</div>
-		</CardContainer>
-	)
+	if (error)
+		return (
+			<CardContainer className="w-full h-96 mt-5">
+				<div className="flex flex-col gap-4">
+					<div className="text-red-500 text-center">{error}</div>
+					<button
+						onClick={() => fetchStaff()}
+						className="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-md">
+						Retry
+					</button>
+				</div>
+			</CardContainer>
+		);
 
 	if (loading)
 		return (
@@ -64,7 +68,7 @@ export const AllHospitals = ({ meta = false }) => {
 	return (
 		<CardContainer className="w-full mt-5">
 			<SearchBar />
-			<AllHospitalsTable hospitals={hospitals} />
+			<StaffTable staff={staff} />
 			{/* page meta */}
 			<div className="flex justify-between my-6">
 				<div>
@@ -87,7 +91,7 @@ export const AllHospitals = ({ meta = false }) => {
 									link.active && "ring-4 ring-primary-600/40"
 								} bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md mr-2`}
 								onClick={() =>
-									fetchHospitals(link.url.split("/").pop())
+									fetchStaff(link.url.split("/").pop())
 								}>
 								{link.label}
 							</button>
@@ -96,7 +100,7 @@ export const AllHospitals = ({ meta = false }) => {
 				</>
 			) : (
 				<Link
-					to="hospitals"
+					to="staff"
 					className="mt-4 bg-primary-500 hover:bg-primary-600 text-white hover:no-underline hover:text-white px-5 py-2 rounded-md inline-block">
 					View all
 				</Link>
@@ -105,7 +109,6 @@ export const AllHospitals = ({ meta = false }) => {
 	);
 };
 
-
-AllHospitals.propTypes = {
+AllStaff.propTypes = {
 	meta: PropTypes.bool,
 };

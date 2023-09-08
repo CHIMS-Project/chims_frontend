@@ -11,6 +11,16 @@ import { HospitalsLayout } from "./layouts/HospitalsLayout"
 import { Hospital } from "./views/Dashboard/hospitals/Hospital"
 import { AddHospital } from "./views/Dashboard/hospitals/AddHospital"
 import { HospitalDetails } from "./views/Dashboard/hospitals/HospitalDetails"
+import { HospitalPatients } from "./views/Dashboard/hospitals/HospitalPatients"
+import { HospitalStaff } from "./views/Dashboard/hospitals/HospitalStaff"
+import { PatientsLayout } from "./views/Dashboard/patients/PatientsLayout"
+import { AllPatients } from "./views/Dashboard/patients/AllPatients"
+import { Patient } from "./views/Dashboard/patients/Patient"
+import { StaffLayout } from "./views/Dashboard/staff/StaffLayout"
+import { AllStaff } from "./views/Dashboard/staff/AllStaff"
+import { Staff } from "./views/Dashboard/staff/Staff"
+import { AllDoctors } from "./views/Dashboard/staff/AllDoctors"
+import { AllNurses } from "./views/Dashboard/staff/AllNurses"
 
 function App() {
 
@@ -29,8 +39,19 @@ function App() {
                     <Route path="add" element={<AddHospital />} />
                     <Route path=":id" element={<Hospital />} >
                       <Route index element={<HospitalDetails />} />
-                      {/* <Route path="edit" element={<AddHospital />} /> */}
+                      <Route path="patients" element={<HospitalPatients />} />
+                      <Route path="staff" element={<HospitalStaff />} />
                     </Route>
+                  </Route>
+                  <Route path="patients" element={<PatientsLayout />} >
+                    <Route index element={<AllPatients meta />} />
+                    <Route path=":id" element={<Patient />} />
+                  </Route>
+                  <Route path="staff" element={<StaffLayout />} >
+                    <Route index element={<AllStaff meta />} />
+                    <Route path="doctors" element={<AllDoctors />} />
+                    <Route path="nurses" element={<AllNurses />} />
+                    <Route path=":id" element={<Staff />} />
                   </Route>
                   <Route path="*" element={<Overview />} />
                 </Route>
