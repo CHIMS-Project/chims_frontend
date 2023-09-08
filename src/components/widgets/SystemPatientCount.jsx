@@ -38,19 +38,19 @@ export const SystemPatientCount = () => {
 	if (loading) return <div>Loading...</div>;
 
 	return (
-		<Link
-			to={"patients"}
-			className="hover:no-underline hover:ring hover:ring-primary-400 rounded-lg transition">
-			<CardContainer>
+		<CardContainer className={'w-full'} >
 				<CardHeader title={"Patients Total"} />
 				<CardBody>
+				<Link
+					to={"patients"}
+					className="hover:no-underline  hover:bg-slate-100 rounded-lg transition">
 					<SmallCardDetail
 						figure={count}
 						detailTitle="Patients"
 						icon={faUsers}
-					/>
+						/>
+						</Link>
 				</CardBody>
 			</CardContainer>
-		</Link>
 	);
 };

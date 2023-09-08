@@ -40,11 +40,11 @@ export const HospitalCount = () => {
 	if (loading) return (<div>Loading...</div>)
 	return (
 		<>
-			<CardContainer>
+			<CardContainer className={'w-full'}>
 				<CardHeader title="Registered Hospitals" />
 				<CardBody>
 					<Link
-						to="staff/doctors"
+						to="hospitals"
 						className="hover:no-underline hover:bg-slate-100 rounded-md">
 						<SmallCardDetail
 							figure={count}

@@ -24,6 +24,10 @@ export const AuthProvider = ({ children }) => {
 			setUser(res.data.user);
 		} catch (err) {
 			console.log(err);
+
+			if(err.message === 'Network Error') {
+				setAuthError('Network Error');
+			}
 			if (err.response.status === 401) {
 				console.log("Unauthorized");
 				setUser(null);
