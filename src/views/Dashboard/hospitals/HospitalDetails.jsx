@@ -9,24 +9,34 @@ export const HospitalDetails = () => {
 		<div className="flex gap-10 mt-5">
 			<CardContainer className={"flex-1 p-2"}>
 				<CardHeader title={"Departments"} />
-				<table className="w-full">
-					<thead>
-						<tr className="text-left">
-							<th className="p-2">Id</th>
-							<th className="p-2">Name</th>
-						</tr>
-					</thead>
-					<tbody>
-						{departments?.map((department) => (
-							<tr
-								key={department.id}
-								className="border-b border-gray-200 hover:bg-slate-100">
-								<td className="p-2">{department.id}</td>
-								<td className="p-2">{department.name}</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
+                {
+                    departments?.length === 0 ? (
+                        <p className="mt-3">No registered departments</p>
+
+                    ) : (
+
+                    <table className="w-full">
+                        <thead>
+                            <tr className="text-left">
+                                <th className="p-2">Id</th>
+                                <th className="p-2">Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                            departments?.map((department) => (
+                                <tr
+                                    key={department.id}
+                                    className="border-b border-gray-200 hover:bg-slate-100">
+                                    <td className="p-2">{department.id}</td>
+                                    <td className="p-2">{department.name}</td>
+                                </tr>
+                            ))
+                            }
+                        </tbody>
+                    </table>
+                    )
+                }
 				<p className="mt-10 text-slate-300 font-bold text-xs">
 					{departments.length}{" "}
 					{departments.length === 1 ? "department" : "departments"}

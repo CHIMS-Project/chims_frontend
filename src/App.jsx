@@ -21,6 +21,8 @@ import { AllStaff } from "./views/Dashboard/staff/AllStaff"
 import { Staff } from "./views/Dashboard/staff/Staff"
 import { AllDoctors } from "./views/Dashboard/staff/AllDoctors"
 import { AllNurses } from "./views/Dashboard/staff/AllNurses"
+import { EditHospital } from "./views/Dashboard/hospitals/EditHospital"
+import { PopUp } from "./components/popups/PopUp"
 
 function App() {
 
@@ -28,25 +30,35 @@ function App() {
     <UserProvider>
       <AuthProvider>
         <AppConfigsProvider>
+              <PopUp />
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Login />} />
               <Route element={<ProtectedRoutes />} >
                 <Route  path="app" element={<MainLayout />} >
                   <Route index element={<Overview />} />
+
+                  {/* Hospital Routes */}
                   <Route path="hospitals" element={<HospitalsLayout />} >
                     <Route index element={<Hospitals />} />
                     <Route path="add" element={<AddHospital />} />
+
+                    {/* Hospital details routes */}
                     <Route path=":id" element={<Hospital />} >
                       <Route index element={<HospitalDetails />} />
                       <Route path="patients" element={<HospitalPatients />} />
                       <Route path="staff" element={<HospitalStaff />} />
+                      <Route path="edit" element={<EditHospital />} /> 
                     </Route>
                   </Route>
+
+                  {/*  Patients routes */}
                   <Route path="patients" element={<PatientsLayout />} >
                     <Route index element={<AllPatients meta />} />
                     <Route path=":id" element={<Patient />} />
                   </Route>
+
+                  {/* Staff routes */}
                   <Route path="staff" element={<StaffLayout />} >
                     <Route index element={<AllStaff meta />} />
                     <Route path="doctors" element={<AllDoctors />} />

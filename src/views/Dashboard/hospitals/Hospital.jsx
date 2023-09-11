@@ -1,4 +1,4 @@
-import { Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { CardContainer } from "../../../components/cards/CardContainer";
 import { useCallback, useState, useEffect } from "react";
 import axios from "axios";
@@ -64,9 +64,21 @@ export const Hospital = () => {
 						</p>
 					</div>
 				</div>
+
+				<Link to={`/app/hospitals/${id}/patients`} className="hover:no-underline hover:text-white text-white bg-primary-500 hover:bg-primary-600 px-5 py-1 rounded-md inline-block mt-3">
+					View patients
+				</Link>
+				<Link to={`/app/hospitals/${id}/staff`} className="mx-2 hover:no-underline hover:text-white text-white bg-primary-500 hover:bg-primary-600 px-5 py-1 rounded-md inline-block mt-3">
+					View staff
+				</Link>
+				<Link to={`/app/hospitals/${id}/edit`} className="hover:no-underline hover:text-white text-white bg-primary-500 hover:bg-primary-600 px-5 py-1 rounded-md inline-block mt-3">
+					Edit
+				</Link>
+
+
 			</CardContainer>
 
-            <Outlet context={{departments, staff, patients}} />
+            <Outlet context={{departments, staff, patients, hospital}} />
 		</div>
 	);
 };

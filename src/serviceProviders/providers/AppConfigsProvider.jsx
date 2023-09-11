@@ -4,8 +4,10 @@ import { useState } from 'react'
 
 export const AppConfigsProvider = ({ children }) => {
     const [sideNavOpen, setSideNavOpen] = useState(true)
+    const [popUpMessage, setPopUpMessage] = useState(null)
+    
     return (
-        <AppConfigsContext.Provider value={{sideNavOpen, setSideNavOpen}} >
+        <AppConfigsContext.Provider value={{sideNavOpen, setSideNavOpen, popUpMessage, setPopUpMessage}} >
             {children}
         </AppConfigsContext.Provider>
     )

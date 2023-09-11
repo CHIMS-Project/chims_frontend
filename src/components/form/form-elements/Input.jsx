@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-export const Input = ({ label, id, type = 'text', onChange, isRequired }) => {
+export const Input = ({ label, id, type = 'text', onChange, isRequired, defaultValue }) => {
 	return (
 		<>
 			<label
@@ -15,6 +15,7 @@ export const Input = ({ label, id, type = 'text', onChange, isRequired }) => {
                 required={isRequired}
                 onChange={onChange}
 				placeholder=""
+				defaultValue={defaultValue}
 			/>
 		</>
 	);
@@ -25,5 +26,6 @@ Input.propTypes = {
     label: PropTypes.string.isRequired,
     isRequired: PropTypes.bool,
     onChange: PropTypes.func,
-    type: PropTypes.string
+    type: PropTypes.string,
+	defaultValue: PropTypes.string
 }
