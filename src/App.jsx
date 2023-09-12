@@ -30,7 +30,7 @@ function App() {
     <UserProvider>
       <AuthProvider>
         <AppConfigsProvider>
-              <PopUp />
+          <PopUp />
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Login />} />
