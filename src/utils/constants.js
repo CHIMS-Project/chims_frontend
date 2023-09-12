@@ -1,1 +1,1 @@
-export const BACKEND_API_URL = 'https://bookish-fishstick-vr66qxq74q4fvw6-8000.app.github.dev/api/v1/';
+export const BACKEND_API_URL = 'https://upgraded-cod-g6pgx6gp94hpp7v-8000.app.github.dev/api/v1/';
