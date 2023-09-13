@@ -15,7 +15,9 @@ export const AllHospitalsTable = ({ hospitals }) => {
 			</thead>
 			<tbody>
 				{hospitals.length > 0 ? (
-					hospitals.map((hospital) => (
+					hospitals.sort(
+						(a, b) => a.name.toLowerCase() > b.name.toLowerCase()
+					).map((hospital) => (
 						<tr
 							key={hospital.id}
 							className="border-b border-gray-200 hover:bg-slate-100">

@@ -79,8 +79,8 @@ export const EditHospitalAddress = ({ prevCity, prevRegion }) => {
 				</InputField>
 				{error && <p className="text-red-500 text-sm">{error}</p>}
 
-				{(( formData?.city === prevCity) ||
-					formData?.region === prevRegion) && (
+				{(( formData?.city !== prevCity) ||
+					formData?.region !== prevRegion) && (
 					<button
 						disabled={loading}
 						className="px-4 py-1 bg-primary-500 hover:bg-primary-600 text-white rounded-md">

@@ -3,11 +3,13 @@ import { useCallback, useEffect, useState } from "react";
 import { BACKEND_API_URL } from "../../utils/constants";
 import { getToken } from "../../utils/helpers";
 import PropTypes from "prop-types";
+import { AddDepartment } from "../form/hospital-forms/AddDepartment";
 
 export const DepartmentsList = ({ id }) => {
 	const [departments, setDepartments] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
+    const [openAddDept, setOpenAddDept] = useState(false)
 
 	const fetchDepartments = useCallback(async () => {
 		setLoading(true);
@@ -61,10 +63,23 @@ export const DepartmentsList = ({ id }) => {
 				<div>No departments found</div>
 			)}
 
-			<button  className="inline-block w-full rounded-lg p-2 bg-slate-100 hover:bg-slate-200">
-                Add Department
+			<button
+            onClick={() => setOpenAddDept(!openAddDept)}
+               className="inline-block w-full rounded-lg p-2 bg-slate-100 hover:bg-slate-200">
+                {
+                    openAddDept ? "Cancel" : "Add Department"
+                }
                 &nbsp;
             </button>
+
+            {
+                openAddDept && (
+                    <AddDepartment id={id} onSuccess={() => {
+                        setOpenAddDept(false)
+                        fetchDepartments()
+                    }} />
+                )
+            }
 		</div>
 	);
 };

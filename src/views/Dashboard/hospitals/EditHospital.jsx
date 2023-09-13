@@ -22,7 +22,7 @@ export const EditHospital = () => {
         <EditHospitalAddress prevCity={hospital?.city} prevRegion={hospital?.region} />
       </CardContainer>
 
-      <CardContainer className={"w-full max-w-2xl max-h-[24rem]"}>
+      <CardContainer className={"w-full max-w-2xl max-h-[24rem] overflow-auto"}>
         <CardHeader title={"Hospital Departments"} />
         <DepartmentsList id={hospital?.id} />
       </CardContainer>
