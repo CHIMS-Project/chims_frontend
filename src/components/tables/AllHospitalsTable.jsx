@@ -29,9 +29,12 @@ export const AllHospitalsTable = ({ hospitals }) => {
 									className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md mr-2 hover:no-underline hover:text-white">
 									View
 								</Link>
-								<button className="bg-primary-200 text-white px-4 py-2 rounded-md">
+
+								<Link
+									to={`/app/hospitals/${hospital.id}/edit`}
+									className="bg-primary-400 hover:bg-primary-500 text-white px-4 py-2 rounded-md mr-2 hover:no-underline hover:text-white">
 									Edit
-								</button>
+								</Link>
 							</td>
 						</tr>
 					))

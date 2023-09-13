@@ -21,7 +21,7 @@ export const LoginForm = () => {
 	const verify = async (e) => {
 		e.preventDefault();
 
-		if (staffID === "") return alert("Staff Id is required");
+		if (staffID === "") return alert("Staff ID is required");
 
 		setVerifying(true);
 		// perform ID verification logic
@@ -46,7 +46,7 @@ export const LoginForm = () => {
 			password: password,
 		});
 
-		setLoggingIn(false);
+		// setLoggingIn(false);
 	};
 
 	return (

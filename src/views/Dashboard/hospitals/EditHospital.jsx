@@ -16,8 +16,13 @@ export const EditHospital = () => {
         <EditHospitalName prevHospitalName={hospital?.name} />
       </CardContainer>
 
-      <CardContainer className={"w-full max-w-2xl"}>
+      <CardContainer className={"w-full max-w-2xl mb-10"}>
         <CardHeader title={"Edit Hospital Address"} />
+        <EditHospitalAddress prevCity={hospital?.city} prevRegion={hospital?.region} />
+      </CardContainer>
+
+      <CardContainer className={"w-full max-w-2xl max-h-[24rem]"}>
+        <CardHeader title={"Hospital Departments"} />
         <EditHospitalAddress prevCity={hospital?.city} prevRegion={hospital?.region} />
       </CardContainer>
 
