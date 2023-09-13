@@ -3,6 +3,7 @@ import { CardContainer } from "../../../components/cards/CardContainer"
 import { EditHospitalName } from "../../../components/form/hospital-forms/EditHospitalName"
 import { CardHeader } from "../../../components/cards/CardHeader"
 import { EditHospitalAddress } from "../../../components/form/hospital-forms/EditHospitalAddress"
+import { DepartmentsList } from "../../../components/lists/DepartmentsList"
 
 export const EditHospital = () => {
   const { hospital } = useOutletContext()
@@ -23,7 +24,7 @@ export const EditHospital = () => {
 
       <CardContainer className={"w-full max-w-2xl max-h-[24rem]"}>
         <CardHeader title={"Hospital Departments"} />
-        <EditHospitalAddress prevCity={hospital?.city} prevRegion={hospital?.region} />
+        <DepartmentsList id={hospital?.id} />
       </CardContainer>
 
     </div>
