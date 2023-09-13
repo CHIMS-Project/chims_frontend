@@ -35,11 +35,15 @@ export const AddDepartment = ({id, onSuccess}) => {
         })
         .then(() => {
             onSuccess()
-            setPopUpMessage(`Department ${name} added successfully`)
+            setPopUpMessage(`'${name}' Department added successfully`)
         }  )
         .catch((err) => {
             console.log(err)
-            setError("Something happened");
+
+            if (err.code === 'ECONNREFUSED') return setError("Could not connect to the server")
+            if (err.response.status === 422) return setError(err.response.data.errors.name[0])
+            // setError("Something happened");
+            setError(err.response.message)
         })
         .finally(() => setLoading(false))
 
@@ -47,6 +51,7 @@ export const AddDepartment = ({id, onSuccess}) => {
   return (
     <CardContainer className="w-full max-w-lg fixed top-1/2 left-1/2 -translate-x-1/2 bg-slate-50 " >
         <form className="w-full" onSubmit={handleSubmit}>
+            <h4 className="text-xl font-bold mb-3">Add Department</h4>
             {
                 error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-3" role="alert">
                     <strong className="font-bold">Error!</strong>

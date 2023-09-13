@@ -64,6 +64,9 @@ export const AllHospitals = ({ meta = false }) => {
 	return (
 		<CardContainer className="w-full mt-5">
 			<SearchBar />
+			<Link to="add" className="mt-4 bg-primary-500 hover:bg-primary-600 text-white hover:no-underline hover:text-white px-5 py-2 rounded-md inline-block">
+				Add Hospital
+			</Link>
 			<AllHospitalsTable hospitals={hospitals} />
 			{/* page meta */}
 			<div className="flex justify-between my-6">
