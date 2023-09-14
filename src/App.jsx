@@ -23,6 +23,8 @@ import { AllDoctors } from "./views/Dashboard/staff/AllDoctors"
 import { AllNurses } from "./views/Dashboard/staff/AllNurses"
 import { EditHospital } from "./views/Dashboard/hospitals/EditHospital"
 import { PopUp } from "./components/popups/PopUp"
+import { AdmissionLayout } from "./layouts/AdmissionLayout"
+import { AllStaffAdmissions } from "./components/widgets/AllStaffAdmissions"
 
 function App() {
 
@@ -64,6 +66,11 @@ function App() {
                     <Route path="doctors" element={<AllDoctors />} />
                     <Route path="nurses" element={<AllNurses />} />
                     <Route path=":id" element={<Staff />} />
+                  </Route>
+
+                  {/* Admissions routes */}
+                  <Route path="admissions" element={<AdmissionLayout />} >
+                    <Route index element={<AllStaffAdmissions meta />} />
                   </Route>
                   <Route path="*" element={<Overview />} />
                 </Route>
