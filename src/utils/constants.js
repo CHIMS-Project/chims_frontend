@@ -1,1 +1,1 @@
-export const BACKEND_API_URL = 'https://chims-api.up.railway.app/api/v1/';
+export const BACKEND_API_URL = 'http://127.0.0.1:8000/api/v1/';
