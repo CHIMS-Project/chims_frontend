@@ -25,6 +25,7 @@ import { EditHospital } from "./views/Dashboard/hospitals/EditHospital"
 import { PopUp } from "./components/popups/PopUp"
 import { AdmissionLayout } from "./layouts/AdmissionLayout"
 import { AllStaffAdmissions } from "./components/widgets/AllStaffAdmissions"
+import { AddAdmissionForm } from "./components/form/admissions-form/AddAdmissionForm"
 
 function App() {
 
@@ -71,6 +72,7 @@ function App() {
                   {/* Admissions routes */}
                   <Route path="admissions" element={<AdmissionLayout />} >
                     <Route index element={<AllStaffAdmissions meta />} />
+                    <Route path="add" element={<AddAdmissionForm />} />
                   </Route>
                   <Route path="*" element={<Overview />} />
                 </Route>

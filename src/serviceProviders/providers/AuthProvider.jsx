@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 					Accept: "application/json",
 				},
 			});
-			// console.log(res.data.user);
+			console.log(res.data.user);
 			setUser(res.data.user);
 		} catch (err) {
 			console.log(err);
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
 	}, [setUser]);
 
 	useEffect(() => {
-		console.log(isTokenSaved(), isLoggedIn);
+		// console.log(isTokenSaved(), isLoggedIn);
 		if (isTokenSaved()) {
 			const token = getToken();
 			fetchUser(token);
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
                 setUser(response.data.user);
 			})
 			.catch((error) => {
-				// console.log(error);
+				console.log(error);
 				setAuthError(error.response.data.message);
 				setIsLoggedIn(false);
 			});

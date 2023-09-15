@@ -7,12 +7,14 @@ import { PatientTable } from "../../../components/tables/PatientTable";
 import { CardContainer } from "../../../components/cards/CardContainer";
 import { BACKEND_API_URL } from "../../../utils/constants";
 import { SearchBar } from "../../../components/form/SearchBar";
+import { useRole } from "../../../hooks/useRole";
 
 export const AllPatients = ({ meta = false }) => {
 	const [patients, setPatients] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [data, setData] = useState([]);
 	const [error, setError] = useState(null);
+	const userType = useRole()
 
 	const fetchHospitals = useCallback((route = "patients") => {
 		setLoading(true);
@@ -43,6 +45,8 @@ export const AllPatients = ({ meta = false }) => {
 	useEffect(() => {
 		fetchHospitals();
 	}, [fetchHospitals]);
+
+	if(userType === 'patient') return <div>You are not authorized to view this page</div>
 
 	if(error) return (
 		<CardContainer className="w-full h-96 mt-5">

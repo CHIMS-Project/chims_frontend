@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useBreadCrumbs } from "../hooks/useBreadCrumbs";
+import { Admissions } from "../views/Dashboard/admissions/Admissions";
 
 export const AdmissionLayout = () => {
 	const breadcrumbs = useBreadCrumbs();
@@ -15,6 +16,8 @@ export const AdmissionLayout = () => {
 					);
 				})}
 			</h1>
+
+			<Admissions />
 
 			<Outlet />
 		</div>

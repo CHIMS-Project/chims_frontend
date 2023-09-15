@@ -14,9 +14,13 @@ export const Hospital = () => {
     const [staff, setStaff] = useState(null);
     const [patients, setPatients] = useState(null);
     const [loading, setLoading] = useState(true);
+	// const idRef = useRef(cusID);
 
 	const fetchHospital = useCallback(() => {
         setLoading(true);
+		// const ID = idRef.current || id;
+
+		console.log(id)
 		axios
 			.get(`${BACKEND_API_URL}hospitals/${id}`, {
 				headers: {
